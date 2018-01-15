@@ -10,8 +10,8 @@ var browserSync = require('browser-sync').create();
 gulp.task("typescript", function () {
     return tsProject.src().pipe(
           tsProject()).js.pipe(gulp.dest("dist")
-        );
-        
+        );       
+
 });
 
 /*
@@ -60,7 +60,8 @@ gulp.task('bs', ['join'], function() {
         browser: "chrome",
         port: 5000,
   });
-});
 
+});
+  
 
 

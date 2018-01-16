@@ -1,13 +1,10 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
+var main_route_driver_1 = require("../controller/main.route.driver");
 /*
 *Exporting function which gets a start page
 */
 function mainRoute(app) {
-    app.get('/', function (req, res) {
-        res.sendFile('index.html', {
-            root: __dirname
-        });
-    });
+    app.get('/', main_route_driver_1.mainRouteDriver.indexPage);
 }
 exports.mainRoute = mainRoute;

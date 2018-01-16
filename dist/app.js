@@ -1,10 +1,15 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var express = require("express");
 var bodyParser = require("body-parser");
 var main_route_1 = require("./routes/main.route");
+var gender_route_1 = require("./routes/gender.route");
+var gender_data_request_1 = require("./external/gender_data/gender.data.request");
 var app = express();
 app.use(bodyParser.json());
 app.use(express.static(__dirname));
 main_route_1.mainRoute(app);
+gender_route_1.genderRoute(app);
+//getGenderData();
+gender_data_request_1.getGenderData2();
 app.listen(3000);

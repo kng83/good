@@ -8,3 +8,5 @@
             "es2015"
           ]
     },
+
+//aby odczytac html i xml pierwszy tag musi poprzedzac spacja

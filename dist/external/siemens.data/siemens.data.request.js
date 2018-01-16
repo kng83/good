@@ -2,17 +2,18 @@
 exports.__esModule = true;
 var xml2json = require("xml2js");
 var rp = require("request-promise");
-function getGenderData() {
+function siemensData() {
     var options = {
-        uri: 'http://172.27.22.203/dane3.xml',
+        uri: 'http://172.27.20.214/awp/bobo/siemens_out.xml',
         headers: {
             'User-Agent': 'Request-Promise'
         },
         json: false
     };
-    var genderResponse = rp(options)
+    var siemensResponse = rp(options)
         .then(function (response) {
         return new Promise(function (resolve) {
+            console.log(response);
             xml2json.parseString(response, function (err, jsonResult) {
                 if (err) {
                     throw err;
@@ -25,15 +26,15 @@ function getGenderData() {
     })
         .then(function (jsonResult) {
         var singleResult = jsonResult['table']['div'];
-        var GenderModelArray = [];
+        var SiemensModelArray = [];
         for (var key in singleResult) {
             var genderModel = {
-                description: singleResult[key]['b'][0],
-                value: singleResult[key]['b'][1]
+                description: singleResult[key]['p'][0],
+                value: singleResult[key]['p'][1]
             };
-            GenderModelArray.push(genderModel);
+            SiemensModelArray.push(genderModel);
         }
-        return GenderModelArray;
+        return SiemensModelArray;
     })["catch"](function (err) {
         // API call failed...
         console.log(err.message);
@@ -41,6 +42,6 @@ function getGenderData() {
     /*
     *Zwrocenie obietnicy z zawartosci zmiennych z gendera
     */
-    return genderResponse;
+    return siemensResponse;
 }
-exports.getGenderData = getGenderData;
+exports.siemensData = siemensData;

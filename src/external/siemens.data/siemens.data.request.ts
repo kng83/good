@@ -1,42 +1,42 @@
 import * as xml2json from 'xml2js';
 import * as rp from 'request-promise';
-import {GenderModel} from './gender.models/gender.model';
+import { SiemensModel }from './simenes.models/simens.data.model';
 
-
-export function getGenderData(){
+export function siemensData(){
     
     const options: any = {
-        uri: 'http://172.27.22.203/dane3.xml',
+        uri: 'http://172.27.20.214/awp/bobo/siemens_out.xml',
         headers: {
             'User-Agent': 'Request-Promise'
         },
         json: false
     }
 
-    const genderResponse = rp(options)
+    const siemensResponse = rp(options)
     .then((response) => {
         return new Promise((resolve)=>{
+            console.log(response);
             xml2json.parseString(response,(err,jsonResult)=>{
                 if(err){
                     throw err;
                 } else{
                     resolve(jsonResult);
-                }
+                } 
             });
         })      
     })
     .then((jsonResult:any)=>{
         let singleResult =jsonResult['table']['div'];
-        let GenderModelArray:GenderModel[] =[];
+        let SiemensModelArray:SiemensModel[] =[];
         for(let key in singleResult){
-            let genderModel: GenderModel ={
-                description:singleResult[key]['b'][0],
-                value: singleResult[key]['b'][1]
+            let genderModel: SiemensModel ={
+                description:singleResult[key]['p'][0],
+                value: singleResult[key]['p'][1]
             }
-            GenderModelArray.push(genderModel);
+            SiemensModelArray.push(genderModel);
         }
         
-        return GenderModelArray;
+        return SiemensModelArray;
     })
     .catch( (err) => {
         // API call failed...
@@ -46,5 +46,6 @@ export function getGenderData(){
     /*
     *Zwrocenie obietnicy z zawartosci zmiennych z gendera
     */
-    return genderResponse;
+    return siemensResponse;
+
 }

@@ -1,14 +1,12 @@
 import * as xml2json from 'xml2js';
 import * as rp from 'request-promise';
+import { json } from 'body-parser';
+import { getDefaultSettings } from 'http2';
+import {GenderModel} from './gender.models/gender.model';
 
 
-export function getGenderData2(){
+export function getGenderData(){
     
-    interface GenderModel{
-        description:string,
-        value: string
-    };
-
     const options: any = {
         uri: 'http://172.27.22.203/dane3.xml',
         headers: {
@@ -17,12 +15,38 @@ export function getGenderData2(){
         json: false// Automatically parses the JSON string in the response
     }
 
-    rp(options)
+    const genderResponse = rp(options)
     .then((response) => {
-       // console.log(response);
+        return new Promise((resolve)=>{
+            xml2json.parseString(response,(err,jsonResult)=>{
+                if(err){
+                    throw err;
+                } else{
+                    resolve(jsonResult);
+                }
+            });
+        })      
     })
-    .catch(function (err) {
+    .then((jsonResult:any)=>{
+        let singleResult =jsonResult['table']['div'];
+        let GenderModelArray:GenderModel[] =[];
+        for(let key in singleResult){
+            let genderModel: GenderModel ={
+                description:singleResult[key]['b'][0],
+                value: singleResult[key]['b'][1]
+            }
+            GenderModelArray.push(genderModel);
+        }
+        
+        return GenderModelArray;
+    })
+    .catch( (err) => {
         // API call failed...
+        console.log(err.message);
     });
 
+    /*
+    *Zwrocenie obietnicy z zawartosci zmiennych z gendera
+    */
+    return genderResponse;
 }

@@ -13,8 +13,8 @@ function siemensData() {
     var siemensResponse = rp(options)
         .then(function (response) {
         return new Promise(function (resolve) {
-            console.log(response);
-            xml2json.parseString(response, function (err, jsonResult) {
+            var resp = response.substring(2, response.length - 6);
+            xml2json.parseString(resp, function (err, jsonResult) {
                 if (err) {
                     throw err;
                 }
@@ -29,15 +29,15 @@ function siemensData() {
         var SiemensModelArray = [];
         for (var key in singleResult) {
             var genderModel = {
-                description: singleResult[key]['p'][0],
-                value: singleResult[key]['p'][1]
+                description: singleResult[key]['b'][0],
+                value: singleResult[key]['b'][1]
             };
             SiemensModelArray.push(genderModel);
         }
         return SiemensModelArray;
     })["catch"](function (err) {
         // API call failed...
-        console.log(err.message);
+        console.log(err.message, 'ja cie dziękuje, Mariusz zobacz oni tu klina dali');
     });
     /*
     *Zwrocenie obietnicy z zawartosci zmiennych z gendera

@@ -1,0 +1,6 @@
+<Get_Data>
+    <Machine_Speed>:="Get_Data".Machine_Speed:</Machine_Speed>
+    <Pallet_Present>:="Get_Data".Pallet_Present:</Pallet_Present>
+    <Pallet_Counter>:="Get_Data".Pallet_Counter: </Pallet_Counter>
+    <Production_Active>:="Get_Data".Production_Active:</Production_Active>
+</Get_Data>

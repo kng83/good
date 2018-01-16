@@ -13,10 +13,10 @@ export function siemensData(){
     }
 
     const siemensResponse = rp(options)
-    .then((response) => {
+    .then((response:string) => {
         return new Promise((resolve)=>{
-            console.log(response);
-            xml2json.parseString(response,(err,jsonResult)=>{
+            let resp =response.substring(2,response.length-6);
+            xml2json.parseString(resp,(err,jsonResult)=>{
                 if(err){
                     throw err;
                 } else{
@@ -30,8 +30,8 @@ export function siemensData(){
         let SiemensModelArray:SiemensModel[] =[];
         for(let key in singleResult){
             let genderModel: SiemensModel ={
-                description:singleResult[key]['p'][0],
-                value: singleResult[key]['p'][1]
+                description:singleResult[key]['b'][0],
+                value: singleResult[key]['b'][1]
             }
             SiemensModelArray.push(genderModel);
         }
@@ -40,7 +40,7 @@ export function siemensData(){
     })
     .catch( (err) => {
         // API call failed...
-        console.log(err.message); 
+        console.log(err.message,'ja cie dziękuje, Mariusz zobacz oni tu klina dali'); 
     }); 
 
     /*

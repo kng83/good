@@ -9,4 +9,5 @@
           ]
     },
 
-//aby odczytac html i xml pierwszy tag musi poprzedzac spacja
+//Siemens s7-1200 response problem:
+- Request to Siemens s7-1200 is not giving a normal respone : CE<parent>...</parent>0. 

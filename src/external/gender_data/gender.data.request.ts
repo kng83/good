@@ -1,6 +1,6 @@
 import * as xml2json from 'xml2js';
 import * as rp from 'request-promise';
-import {GenderModel} from './gender.models/gender.model';
+import {GenderModel} from './gender_models/gender.model';
 
 
 export function getGenderData(){

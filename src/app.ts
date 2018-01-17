@@ -1,5 +1,4 @@
-import * as express from 'express';
-import {Request,Response} from 'express';
+import * as express from 'express'
 import *as bodyParser from 'body-parser';
 import {mainRoute} from './routes/main.route';
 import {genderRoute} from './routes/gender.route';

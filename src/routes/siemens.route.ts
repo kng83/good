@@ -1,5 +1,5 @@
 import {Request,Response,Express} from 'express';
-import {siemensData} from '../external/siemens.data/siemens.data.request';
+import {siemensData} from '../external/siemens.data/siemens.req';
 import { Readable } from 'stream';
 
 export function siemensRoute(app:Express){

@@ -1,0 +1,18 @@
+﻿DATA_BLOCK "Get_Data"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+NON_RETAIN
+   VAR 
+      Machine_Speed : Int;   // Predkosc maszyny
+      Pallet_Present : Bool;   // Paleta obecna
+      Pallet_Counter : Int;   // Licznik Palet
+      Production_Active : Bool;   // Produkcja aktywna
+      Machin_Nr : Int;   // Numer Maszyny
+   END_VAR
+
+
+BEGIN
+   Machin_Nr := 1;
+
+END_DATA_BLOCK
+

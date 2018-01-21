@@ -50,21 +50,33 @@ gulp.task("convert", function () {
                 });
 
                 var PageObject = {};
+                var PageInterface = {};
+                //Tworzenie klasy elementInterface
+                var ElementInterface = (function(){
+                    ElementInterface = function(){}
+                    return ElementInterface;
+                })();
+                var elementInterface = new ElementInterface();
+
                 modifedArray.forEach(function (arrayValue, index) {
 
                     PageObject[arrayValue[0]] = {
                             "@": {
-                                "type": arrayValue[1],
+                                "name":arrayValue[0],
+                                "typ": arrayValue[1],
                                 "desc": arrayValue[2]
                             },
 
                             "#": ":=" + dbName + "." + arrayValue[0] + ":"
                         }
+                    PageInterface[arrayValue[0]] = elementInterface.constructor.name;
 
                     
                 });
+                console.log(PageInterface);
                 console.log(PageObject);
-                var xmlPage = js2xmlparser.parse(dbName, PageObject,{pretty:false, format:{pretty:false}});
+                //js2xmlparser ustawiony na pretty:false aby plik byl mniejszy
+                var xmlPage = js2xmlparser.parse(dbName, PageObject,{format:{pretty:false}});
 
                 fs.writeFile(__dirname + "/xml_files/" + file + '.xml', xmlPage, function (err) {
                     if (err) {
